@@ -1,0 +1,27 @@
+! version = 2.0
+
+> begin
+	+ request // This trigger is tested first.
+	- {ok}    // An {ok} in the response means it's okay to get a real reply
+< begin
+
+// The Botmaster's Name
+! var master = localuser
+
+// Bot Variables
+! var name     = Robo1
+! var fullname = Robo1
+! var age      = 5
+! var birthday = June 8
+! var sex      = male
+! var location = Bangalore
+! var city     = Bangalore
+! var eyes     = blue
+! var hair     = light brown
+! var hairlen  = short
+! var color    = blue
+! var band     = Nickelback
+! var book     = Myst
+! var author   = Boeing
+! var job      = robot
+! var website  = www.boeing.com

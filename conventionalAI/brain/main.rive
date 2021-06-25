@@ -1,0 +1,61 @@
+! version = 2.0
+
++ i want to search for a flight
+- Ok tell me the source and destination
+
++ search flight
+- Ok tell me the source and destination
+
++ from * to *
+- Ok <set sr=<star1>> to <set dt=<star2>>, now tell me the date
+
++ * (jan|january|feb|february|march|april|june|jun|july|august|sept|september|oct|october|nov|november|dec|december)
+- <call>search <get sr>,<get dt>,<star></call>
+
+> object search python
+    import json
+    s, d, t = args[0].upper().split(',')
+    with open('flight-data.json') as f:
+        data = json.load(f)
+    with open('airports.json') as f2:
+        airport = json.load(f2)
+
+    if s in airport and d in airport:
+        s = airport[s]
+        d = airport[d]
+    else:
+        return 'Sorry, No flights available for those cities'
+
+    if s in data:
+        print('1')
+        if d in data[s]:
+            result = ''
+            x = data[s][d]
+            for i in range(1,5):
+                if str(i) in x:
+                    fl = x[str(i)]
+                    result = result + 'Flight number: ' + fl['flight'] +', time: '+ fl['time'] + '\n'
+            return result
+    return 'Sorry, No flights available'
+< object
+
++ search for a flight from * to * on *
+- <call>search <star1>,<star2>,<star3></call>
+
++ please search a flight from * to * on *
+- <call>search <star1>,<star2>,<star3></call>
+
++ from * to * please suggest some flights on *
+- <call>search <star1>,<star2>,<star3></call>
+
++ show me some flights from * to * on *
+- <call>search <star1>,<star2>,<star3></call>
+
++ i want to search flights from * to * on *
+- <call>search <star1>,<star2>,<star3></call>
+
+//Please search a flight from bangalore to delhi on 12th july
+//from bangalore to chennai, please suggest some flights on 12th july
+//Show me some flights from mumbai to trivandrum on 12th july
+//I want to search flights from chennai to delhi on 12th july
+//search for a flight from bangalore to chennai on 45

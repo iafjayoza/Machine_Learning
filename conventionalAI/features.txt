@@ -1,0 +1,6 @@
+Flight Search
+
+
+Future enhancements:
+- suggest a flight
+- compare price
